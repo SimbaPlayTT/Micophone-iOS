@@ -10,7 +10,9 @@ On Windows, use **GitHub Actions to compile on a hosted Mac**, then download the
 Start-Process 'https://github.com/SimbaPlayTT/Micophone-iOS/actions/workflows/ios.yml'
 ```
 
-Select **Run workflow**, choose `main` and an available standard Mac runner. After a successful **Build and test iOS** run, download **Micophone-iOS-unsigned** from its Artifacts section, extract the ZIP, and load the `.ipa` into the Windows signing tool. A green **Portable Swift and receiver tests** run does not produce an IPA.
+The [successful iPhone package build](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41899057773) already contains a real IPA. Download **Micophone-iOS-unsigned** from its Artifacts section, extract the ZIP, and load the `.ipa` into the Windows signing tool. A green **Portable Swift and receiver tests** run does not produce an IPA.
+
+For future builds, select **Run workflow**, choose `main` and an available standard Mac runner. A successful **Build and test iOS** run produces the same artifact after simulator validation. The separate **Package unsigned iPhone app** workflow compiles/archives only; it does not certify that simulator or physical-device tests pass.
 
 If the native build is queued or fails before a runner is assigned, no IPA exists yet. Inspect the native run's annotations; hosted Mac capacity is separate from your Windows setup. The initial Mac builds failed to obtain a runner, before any application compilation. Follow the sections below after a native build succeeds.
 

@@ -9,9 +9,10 @@ Date: 2026-11-04. Local implementation host: Windows, Python 3.10. No local Swif
 | Python actual receiver UDP compatibility | PASS: 5 tests, 0 failures, executed on Windows with loopback access |
 | Swift portable PCM/framing/state tests | PASS: compiled with Swift 6.4.2 and 6.4.1 on GitHub Ubuntu 24.04; 7 tests, 0 failures per run |
 | Syntax parsing of all 18 tracked Swift files | PASS on Swift 6.4.1; parsing only, Apple SDK types not checked |
-| Native Swift/iOS simulator compilation | QUEUED / NOT EXECUTED: no Mac runner assigned |
-| AVAudioConverter and real UDP simulator tests | QUEUED / NOT EXECUTED |
-| Real arm64 device archive / unsigned IPA | QUEUED / NOT PRODUCED |
+| Native Swift/iOS simulator compilation | PASS: compiled and linked with Xcode 16.4 |
+| AVAudioConverter tests | PASS: both PCM conversion and stereo 44.1-to-48 kHz resampling tests executed |
+| Real UDP simulator tests | First run: recovery and unreachable-receiver tests PASS; initial handshake timed out. Rerun 41899415141 in progress |
+| Real arm64 device archive / unsigned IPA | PASS: real iPhoneOS archive and unsigned IPA produced in run 41899057773 |
 | Signed installation / physical mic audio / Windows routing | NOT TESTED |
 | Screen locked, 10-minute continuity, interruptions and Bluetooth | NOT TESTED |
 
@@ -47,11 +48,12 @@ Main-branch runs [41854736134](https://github.com/SimbaPlayTT/Micophone-iOS/acti
 
 This confirms compilation/execution of production portable Swift code and whole-source syntax validity, not AVFoundation, SwiftUI or Network.framework type checking/linking.
 
-## Native build blocker at delivery
+## Native build and simulator execution
 
-GitHub accepted the workflows, Actions is enabled and its check API reports zero error annotations. Standard ARM macOS 15 and macOS 26 pools were attempted; the Intel fallback was also requested. No Mac job received a runner during this session. This is an external runner-allocation blocker; no compilation/test success or IPA is inferred from a queued job.
+The earlier ARM/Intel requests failed before compilation because GitHub could not allocate a hosted runner. A later Intel retry received a runner and compiled the app successfully. Xcode 16.4 (16F6) is recorded in `Evidence/XcodeVersion.txt`.
 
-- [Main ARM macOS 26 build, run 41854735985](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41854735985): QUEUED, no runner, no steps executed, source revision `6ef0ec0` (same app source as delivery).
-- [Intel macOS 15 fallback, run 41854401219](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41854401219): QUEUED, no runner, no steps executed, source revision `42fdeac` (same app source as delivery).
+- [First simulator execution, run 41897439702](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41897439702), source `6d69ce7`: **11 of 12 tests passed**. Both AVAudioConverter tests, seven core tests, actual connection failure and automatic recovery tests passed. The first handshake test exceeded its five-second allowance while the first Network.framework callbacks were delayed on the cold simulator. This run is recorded as FAILED, not PASSED.
+- The harness now explicitly boots/reuses the simulator and allows up to 20 seconds for an actual ACK, including the production timeout/retry cycle. PCM packet and mute assertions are unchanged. Production network timeouts and app source are unchanged. [Rerun 41899415141](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41899415141) is in progress.
+- [Device archive, run 41899057773](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41899057773), source `ab54b80`: **PASS**, real arm64 iPhoneOS app archived and packaged. See [BuildArtifact.md](BuildArtifact.md) for checksum and independent ZIP/Mach-O inspection. The complete archive log is retained as `Evidence/DeviceArchive.log`.
 
-Both requests remain active. If a native run fails once a runner becomes available, inspect its compiler/test log and fix it before describing the app as build-verified. No IPA or screenshot has been fabricated. The [device test plan](DeviceValidation.md) remains entirely NOT TESTED irrespective of eventual simulator results.
+Native compilation and packaging are verified. The complete simulator suite is not marked passed until its rerun succeeds. The [device test plan](DeviceValidation.md) remains entirely NOT TESTED irrespective of simulator results.

@@ -2,13 +2,13 @@
 
 A native SwiftUI iOS 16+ client for [Micophone](https://github.com/farzonline/micophone), using its existing Protocol v2 Windows receiver. MIT licensed, no ads, purchases, runtime accounts, telemetry or cloud audio services.
 
-**Validation status:** source and project implemented. **7 Swift core tests, 5 receiver compatibility tests, static project checks and syntax parsing of all Swift sources passed.** The native [GitHub Actions build](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41854735985) is queued without a Mac runner; no iOS compilation, simulator test, archive or IPA has completed yet. See the [test report](Documentation/TestResults.md) for executed evidence. **Physical iPhone recording, Windows audio routing and locked-screen continuity have not been tested.** Background configuration is an implementation, not a verified device guarantee.
+**Validation status:** the native iPhone app compiles and archives successfully with Xcode 16.4. A real **unsigned IPA is available** from the [successful device build](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41899057773). Swift core/receiver checks pass; the first simulator run passed 11 of 12 tests, with an initial handshake timeout being rerun using a cold-start allowance. See the [test report](Documentation/TestResults.md). **Physical iPhone recording, Windows audio routing and locked-screen continuity have not been tested.** Background configuration is an implementation, not a verified device guarantee.
 
 ## Get the app
 
-**An IPA is not available at delivery while the Mac builds are queued.** The following steps apply after the native workflow succeeds. The complete source and Xcode project are available now.
+**On Windows, download the built IPA; Xcode requires macOS.** The source repository is for development and is not itself an installable app.
 
-1. Open **Actions → Build and test iOS → latest successful run**.
+1. Open the [successful iPhone package build](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41899057773), or a later successful **Build and test iOS** run in Actions.
 2. Download **Micophone-iOS-unsigned**, extract the ZIP, and find `Micophone-iOS-unsigned.ipa`.
 3. Sign/install with [Sideloadly](https://sideloadly.io/) or [AltStore Classic](https://faq.altstore.io/altstore-classic/how-to-install-altstore-windows), or build directly in Xcode with a free Personal Team. An unsigned IPA cannot be installed directly. Free provisioning expires after seven days and needs renewal.
 4. Start the original Windows Micophone receiver, allow its private-network firewall access, and note its IPv4 address.
