@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.png -text
+# Preserve the exact original bytes used by UPSTREAM.json hashes.
+Upstream/** -text
