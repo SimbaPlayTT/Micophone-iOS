@@ -38,6 +38,7 @@ jobs:
       - name: Run Swift core tests
         run: swift test
       - name: Run application, audio conversion and UDP tests in iOS Simulator
+        timeout-minutes: 20
         run: bash Scripts/test_simulator.sh
       - name: Archive real device app and package unsigned IPA
         run: bash Scripts/build_unsigned.sh
