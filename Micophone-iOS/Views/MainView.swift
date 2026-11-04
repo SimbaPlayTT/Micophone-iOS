@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MainView: View {
+@MainActor struct MainView: View {
     @ObservedObject var model: ConnectionManager
     @ObservedObject var settings: SettingsManager
     @ObservedObject var permissions: PermissionManager

@@ -18,7 +18,11 @@ import SwiftUI
         WindowGroup {
             MainView(model: connection, settings: settings, permissions: permissions)
                 .tint(.mint)
-                .onChange(of: scenePhase) { phase in connection.sceneChanged(active: phase == .active) }
+                .onChange(of: scenePhase) { phase in
+                    // Permission alerts temporarily make the scene inactive. They must not cancel
+                    // the explicit Start request; only an actual background transition is relevant.
+                    if phase != .inactive { connection.sceneChanged(active: phase == .active) }
+                }
                 .onChange(of: settings.gain) { _ in connection.updateGain() }
         }
     }

@@ -1,7 +1,7 @@
 import SwiftUI
 import AVFoundation
 
-struct SettingsView: View {
+@MainActor struct SettingsView: View {
     @ObservedObject var settings: SettingsManager
     @ObservedObject var permissions: PermissionManager
     let streaming: Bool

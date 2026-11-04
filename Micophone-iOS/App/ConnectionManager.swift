@@ -53,8 +53,14 @@ import OSLog
         network.onStatus = { [weak self] status in
             Task { @MainActor [weak self] in
                 guard let self, self.linkGeneration == ticket else { return }
-                self.connection = status
-                self.updateStatus(status)
+                if case .streaming(let name) = status, !self.state.wantsCapture {
+                    // A callback queued before Stop must not restore a streaming label afterward.
+                    self.connection = .ready(name)
+                    self.updateStatus(.ready(name))
+                } else {
+                    self.connection = status
+                    self.updateStatus(status)
+                }
             }
         }
         network.onStatistics = { [weak self] sent, dropped in
