@@ -1,0 +1,22 @@
+name: Portable Swift and receiver tests
+on:
+  push:
+    branches: [main, ci/core-tests]
+    paths: ['Micophone-iOS/Core/**', 'Tests/Core/**', 'Tests/Python/**', 'Scripts/**', 'Upstream/**', 'Package.swift', '.github/workflows/core.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  core:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify project and original receiver interoperability
+        run: |
+          python3 Scripts/check_project.py
+          python3 -m unittest discover -s Tests/Python -v
+      - name: Compile and test portable Swift code
+        run: |
+          swift --version
+          swift test
