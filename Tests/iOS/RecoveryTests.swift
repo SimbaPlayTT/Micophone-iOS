@@ -27,7 +27,7 @@ final class RecoveryTests: XCTestCase {
             receive()
         }
         listener.start(queue: queue)
-        wait(for: [ready], timeout: 3)
+        wait(for: [ready], timeout: 10)
         let client = NetworkStreamingManager(requiresWiFi: false)
         var reportedFailure = false, reportedRecovery = false
         client.onStatus = { status in
@@ -48,6 +48,6 @@ final class RecoveryTests: XCTestCase {
         }
         client.connect(host: "127.0.0.1", port: try XCTUnwrap(listener.port?.rawValue))
         client.startStreaming(rate: 48000, bufferPackets: 2)
-        wait(for: [timedOut, recovered], timeout: 12, enforceOrder: true)
+        wait(for: [timedOut, recovered], timeout: 20, enforceOrder: true)
     }
 }

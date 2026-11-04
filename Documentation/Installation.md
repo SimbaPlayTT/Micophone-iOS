@@ -16,7 +16,7 @@ If the native build is queued or fails before a runner is assigned, no IPA exist
 
 ## GitHub Actions from Windows
 
-The repository's `.github/workflows/ios.yml` uses `macos-26` and the runner's selected Xcode. It records toolchain versions, checks the pinned protocol fixtures/project, runs portable Swift tests, builds and tests the app in an available iPhone simulator, then archives an arm64 iPhoneOS app with signing disabled. No Apple certificates, passwords, paid developer account or repository secrets are needed for this unsigned build. GitHub account/Actions access is a development dependency, not an app runtime account requirement.
+The repository's `.github/workflows/ios.yml` uses `macos-15-intel` by default and the runner's selected Xcode. It records toolchain versions, checks the pinned protocol fixtures/project, runs portable Swift tests, builds and tests the app in an available iPhone simulator, then archives an arm64 iPhoneOS app with signing disabled. No Apple certificates, passwords, paid developer account or repository secrets are needed for this unsigned build. GitHub account/Actions access is a development dependency, not an app runtime account requirement.
 
 1. Open [Build and test iOS](https://github.com/SimbaPlayTT/Micophone-iOS/actions/workflows/ios.yml).
 2. A push of application/build/test files starts the workflow; **Run workflow** can also start it manually. The manual runner choice offers standard `macos-26`, `macos-15` and `macos-15-intel` pools if one is waiting for capacity. It never selects paid larger runners.

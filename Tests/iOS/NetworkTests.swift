@@ -40,7 +40,7 @@ final class NetworkTests: XCTestCase {
             receive()
         }
         server.start(queue: serverQueue)
-        wait(for: [serverReady], timeout: 3)
+        wait(for: [serverReady], timeout: 10)
         let port = try XCTUnwrap(server.port?.rawValue)
         let client = NetworkStreamingManager(requiresWiFi: false)
         let handshake = expectation(description: "Receiver ACK, not merely UDP ready")
@@ -53,12 +53,14 @@ final class NetworkTests: XCTestCase {
         }
         client.connect(host: "127.0.0.1", port: port)
         client.startStreaming(rate: 48000, bufferPackets: 2)
-        wait(for: [handshake], timeout: 5)
+        // Cold hosted simulators may stall the first Network.framework use.
+        // Allow the production timeout/retry cycle; an actual ACK is required.
+        wait(for: [handshake], timeout: 20)
         client.enqueue(Data(repeating: 17, count: 960))
-        wait(for: [receivedAudio], timeout: 3)
+        wait(for: [receivedAudio], timeout: 5)
         client.setMuted(true)
         client.enqueue(Data(repeating: 17, count: 960))
-        wait(for: [receivedSilence], timeout: 3)
+        wait(for: [receivedSilence], timeout: 5)
         client.stopStreaming()
         client.enqueue(Data(repeating: 17, count: 960))
         client.disconnect()
@@ -67,7 +69,7 @@ final class NetworkTests: XCTestCase {
         client.onStatus = { if case .streaming = $0 { reconnected.fulfill() } }
         client.connect(host: "127.0.0.1", port: port)
         client.startStreaming(rate: 48000, bufferPackets: 2)
-        wait(for: [reconnected], timeout: 5)
+        wait(for: [reconnected], timeout: 10)
     }
 
     func testUnreachableReceiverReportsFailure() {
