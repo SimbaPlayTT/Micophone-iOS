@@ -25,6 +25,6 @@ test_sequence_wrap_loss_duplicate_and_late_packets ... ok
 Ran 5 tests in 0.583s — OK
 ```
 
-An initial restricted-environment loopback run timed out. The identical tests passed with local network access enabled; no protocol code was changed to make that result pass. The Python suite imports the unmodified receiver with only its sounddevice module stubbed, so physical PortAudio/VB-CABLE playback is not covered. The original receiver's full `test_receiver.py` was inspected and retained, but was not run against physical Windows sound hardware.
+An initial restricted-environment loopback run timed out. The identical tests passed with local network access enabled; no protocol code was changed to make that result pass. For macOS portability, the BUSY test subsequently models an existing source on a synthetic different address before sending real UDP HELLO, rather than binding an unconfigured loopback alias. The Python suite imports the unmodified receiver with only its sounddevice module stubbed, so physical PortAudio/VB-CABLE playback is not covered. The original receiver's full `test_receiver.py` was inspected and retained, but was not run against physical Windows sound hardware.
 
 Workflow results, final commit and artifact links will be recorded after native CI completes. The [device test plan](DeviceValidation.md) remains entirely NOT TESTED irrespective of simulator results.

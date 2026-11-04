@@ -82,10 +82,15 @@ class ReceiverCompatibilityTests(unittest.TestCase):
 
     def test_busy_and_restart_from_new_socket(self):
         self.hello()
-        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as other:
-            other.bind(('127.0.0.2', 0))
-            other.settimeout(1)
-            self.assertEqual(self.hello(other)[2], rx.BUSY)
+        # macOS does not bind arbitrary 127/8 addresses without an interface alias.
+        # Model an existing source on another IP; exercise the actual HELLO/BUSY
+        # parser over UDP without changing the runner's network configuration.
+        with self.engine.lock:
+            original = self.engine.source.addr
+            self.engine.source.addr = ('192.0.2.2', original[1])
+        self.assertEqual(self.hello()[2], rx.BUSY)
+        with self.engine.lock:
+            self.engine.source.addr = original
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as restarted:
             restarted.settimeout(1)
             self.assertEqual(self.hello(restarted)[2], rx.ACK)
