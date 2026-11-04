@@ -1,0 +1,45 @@
+name: iOS Intel runner fallback
+on:
+  push:
+    branches: [ci/native-intel]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ios-intel:
+    runs-on: macos-15-intel
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify project and protocol
+        run: |
+          xcodebuild -version
+          python3 Scripts/check_project.py
+          python3 -m unittest discover -s Tests/Python -v
+          python3 Scripts/generate_project.py
+          git diff --exit-code -- Micophone-iOS.xcodeproj
+          plutil -lint Micophone-iOS.xcodeproj/project.pbxproj Micophone-iOS/Info.plist
+      - name: Swift core tests
+        run: swift test
+      - name: Simulator app and integration tests
+        run: bash Scripts/test_simulator.sh
+      - name: Archive and package unsigned device app
+        run: bash Scripts/build_unsigned.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Micophone-iOS-unsigned
+          path: |
+            build/Micophone-iOS-unsigned.ipa
+            build/Micophone-iOS-unsigned.ipa.sha256
+            build/xcode-version.txt
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-and-test-evidence
+          path: |
+            build/*.log
+            build/*.xcresult
+            build/SimulatorApp.png
+            build/xcode-version.txt
+          if-no-files-found: ignore
