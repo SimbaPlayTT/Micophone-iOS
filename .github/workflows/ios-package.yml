@@ -1,0 +1,36 @@
+name: Package unsigned iPhone app
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: package-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    runs-on: macos-15-intel
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check project and protocol sources
+        run: python3 Scripts/check_project.py
+      - name: Compile and archive the iPhone app
+        run: bash Scripts/build_unsigned.sh
+      - name: Upload unsigned device app
+        uses: actions/upload-artifact@v4
+        with:
+          name: Micophone-iOS-unsigned
+          path: |
+            build/Micophone-iOS-unsigned.ipa
+            build/Micophone-iOS-unsigned.ipa.sha256
+            build/xcode-version.txt
+          if-no-files-found: error
+      - name: Upload archive log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: device-build-evidence
+          path: |
+            build/archive.log
+            build/xcode-version.txt
+          if-no-files-found: ignore
