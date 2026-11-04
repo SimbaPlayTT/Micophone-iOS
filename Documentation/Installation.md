@@ -1,5 +1,19 @@
 # Build, signing and installation
 
+## Start here if you use Windows
+
+`open Micophone-iOS.xcodeproj` is a **Mac-only** command. Xcode requires macOS; replacing `open` with a Windows command cannot build the iPhone app. Cloning the repository downloads source code, not an installable app.
+
+On Windows, use **GitHub Actions to compile on a hosted Mac**, then download the resulting IPA and sign/install it with Sideloadly or AltStore Classic. You do not need to open the Xcode project on your PC. In PowerShell, open the build page with:
+
+```powershell
+Start-Process 'https://github.com/SimbaPlayTT/Micophone-iOS/actions/workflows/ios.yml'
+```
+
+Select **Run workflow**, choose `main` and an available standard Mac runner. After a successful **Build and test iOS** run, download **Micophone-iOS-unsigned** from its Artifacts section, extract the ZIP, and load the `.ipa` into the Windows signing tool. A green **Portable Swift and receiver tests** run does not produce an IPA.
+
+If the native build is queued or fails before a runner is assigned, no IPA exists yet. Inspect the native run's annotations; hosted Mac capacity is separate from your Windows setup. The initial Mac builds failed to obtain a runner, before any application compilation. Follow the sections below after a native build succeeds.
+
 ## GitHub Actions from Windows
 
 The repository's `.github/workflows/ios.yml` uses `macos-26` and the runner's selected Xcode. It records toolchain versions, checks the pinned protocol fixtures/project, runs portable Swift tests, builds and tests the app in an available iPhone simulator, then archives an arm64 iPhoneOS app with signing disabled. No Apple certificates, passwords, paid developer account or repository secrets are needed for this unsigned build. GitHub account/Actions access is a development dependency, not an app runtime account requirement.

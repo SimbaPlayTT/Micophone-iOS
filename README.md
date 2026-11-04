@@ -18,6 +18,8 @@ A native SwiftUI iOS 16+ client for [Micophone](https://github.com/farzonline/mi
 
 ## Build and test
 
+**Windows users:** Xcode and the `open Micophone-iOS.xcodeproj` command below require a Mac. Use the [Windows installation path](Documentation/Installation.md#start-here-if-you-use-windows): GitHub Actions builds the IPA on a hosted Mac, then a Windows sideloading tool signs and installs it. Cloning the source does not install the app. The portable test workflow does not produce an IPA.
+
 On macOS with Xcode 16+ and an iOS simulator runtime:
 
 ```sh
