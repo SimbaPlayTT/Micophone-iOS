@@ -1,0 +1,55 @@
+name: Build and test iOS
+on:
+  push:
+    branches: [main]
+    paths: ['Micophone-iOS/**', 'Micophone-iOS.xcodeproj/**', 'Tests/**', 'Scripts/**', 'Package.swift', 'Upstream/**', '.github/workflows/**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ios:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Record toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+          python3 --version
+      - name: Verify project and upstream protocol fixtures
+        run: |
+          python3 Scripts/check_project.py
+          python3 -m unittest discover -s Tests/Python -v
+          python3 Scripts/generate_project.py
+          git diff --exit-code -- Micophone-iOS.xcodeproj
+          plutil -lint Micophone-iOS.xcodeproj/project.pbxproj Micophone-iOS/Info.plist
+      - name: Run Swift core tests
+        run: swift test
+      - name: Run application, audio conversion and UDP tests in iOS Simulator
+        run: bash Scripts/test_simulator.sh
+      - name: Archive real device app and package unsigned IPA
+        run: bash Scripts/build_unsigned.sh
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Micophone-iOS-unsigned
+          path: |
+            build/Micophone-iOS-unsigned.ipa
+            build/Micophone-iOS-unsigned.ipa.sha256
+            build/xcode-version.txt
+          if-no-files-found: error
+      - name: Upload build and test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-and-test-evidence
+          path: |
+            build/*.log
+            build/*.xcresult
+            build/xcode-version.txt
+          if-no-files-found: ignore

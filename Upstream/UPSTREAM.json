@@ -1,0 +1,18 @@
+{
+  "repository": "https://github.com/farzonline/micophone",
+  "commit": "e7d977d3bf5fce6b8666a28f5602c45ab422b1ba",
+  "sourcePaths": {
+    "receiver.py": "pc/receiver.py",
+    "test_receiver.py": "pc/test_receiver.py",
+    "Protocol.kt": "android/app/src/main/java/com/farzonline/micophone/Protocol.kt",
+    "StreamService.kt": "android/app/src/main/java/com/farzonline/micophone/StreamService.kt",
+    "LICENSE": "LICENSE"
+  },
+  "sha256": {
+    "receiver.py": "1dd5f7c91288b9ebeca90480089cbe12758110eb66ef2a541b310c7c9082da8f",
+    "test_receiver.py": "f90d8a279cbb87444909bb1879eb568e64243beb98e349b2c937948a4390ddc6",
+    "Protocol.kt": "63245239611d6ad6ab8364fbeee93e200a726a382112336435e6509aba17ca5c",
+    "StreamService.kt": "81bf26abc01eafbfe2c3fda1a6f4bcd7c88646e4ae376f4eb5bb1a5cc57c8ee3",
+    "LICENSE": "c48c4d76d3b262dfe60d66596292ce3df79417be766e1d072b43efe026c5a254"
+  }
+}
