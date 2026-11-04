@@ -51,5 +51,6 @@ jobs:
           path: |
             build/*.log
             build/*.xcresult
+            build/SimulatorApp.png
             build/xcode-version.txt
           if-no-files-found: ignore

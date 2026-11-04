@@ -30,7 +30,7 @@ final class CoreTests: XCTestCase {
 
     func testBoundedQueueDropsOldestAndClearsOnStop() {
         let queue = BoundedPacketQueue(capacity: 2)
-        for b: UInt8 in [1, 2, 3] { queue.push(Data([b])) }
+        for b in [UInt8(1), 2, 3] { queue.push(Data([b])) }
         XCTAssertEqual(queue.dropped, 1)
         XCTAssertEqual(queue.count, 2)
         XCTAssertEqual(queue.pop(), Data([2]))

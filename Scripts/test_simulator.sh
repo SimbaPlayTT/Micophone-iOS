@@ -7,3 +7,6 @@ xcodebuild -project Micophone-iOS.xcodeproj -scheme Micophone-iOS \
   -configuration Debug -destination "platform=iOS Simulator,id=$device_id" \
   -resultBundlePath "$PWD/build/SimulatorTests.xcresult" \
   CODE_SIGNING_ALLOWED=NO test | tee build/simulator-tests.log
+xcrun simctl launch "$device_id" org.micophone.ios
+sleep 2
+xcrun simctl io "$device_id" screenshot build/SimulatorApp.png
