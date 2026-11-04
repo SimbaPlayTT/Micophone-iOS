@@ -10,7 +10,7 @@
 | Gain, quality, buffering and preferences | Software gain 0–2×, 48/44.1 kHz, three queue/capture presets, Bluetooth option, retry preference | PCM/queue tests PASS; live hardware controls NOT TESTED; no unsupported hardware gain claim |
 | Locked screen and other foreground app | Legitimate active recording session plus audio background mode; scene changes preserve requested capture | Config checked; physical locked-screen continuity NOT TESTED; no guarantee made |
 | Calls, route changes, service reset | Interruption suspension; shouldResume gate; debounced engine/converter rebuild | Portable interruption state tests PASS; Apple notifications/recovery on hardware NOT TESTED |
-| Network failures / recovery | ACK freshness, bounded queues, 1 s retry, no stale audio bursts, Wi-Fi-only transport | Health/state, actual connection-failure and automatic-recovery tests PASS; first handshake test timed out and is being rerun; physical Wi-Fi NOT TESTED |
+| Network failures / recovery | ACK freshness, bounded queues, 1 s retry, no stale audio bursts, Wi-Fi-only transport | PASS: complete native simulator network suite, including handshake, PCM delivery, mute, stop/reconnect, failure and automatic recovery; physical Wi-Fi NOT TESTED |
 | Discovery / pairing | Manual private IPv4 + port, unicast probe | UDP probe tested against actual parser; automatic broadcast deliberately omitted to avoid restricted entitlement; no secure pairing exists upstream |
 | Security/privacy | Standard permissions, explicit Start, visible Stop, no audio files, cellular prohibited | Source/config inspection; protocol is unencrypted/unauthenticated |
 | Free signing / sideloading | Xcode Personal Team, AltStore Classic and Sideloadly instructions | Installation NOT TESTED; unsigned IPA is not directly installable |
@@ -18,4 +18,4 @@
 | Physical device validation | Complete reproducible procedure and observation sheet | All cases NOT TESTED; device/iOS/version/log fields explicitly unrecorded |
 | Entire Windows audio chain open source | App and receiver MIT; external driver not supplied | VB-CABLE is proprietary free/donationware. A fully open-source signed virtual-mic driver is not part of this port |
 
-The native build is available; full simulator rerun and physical validation remain pending. See [TestResults.md](TestResults.md), [BuildArtifact.md](BuildArtifact.md), [DeviceValidation.md](DeviceValidation.md) and [Installation.md](Installation.md).
+The native build and all 12 simulator tests passed. Physical validation remains pending. See [TestResults.md](TestResults.md), [BuildArtifact.md](BuildArtifact.md), [DeviceValidation.md](DeviceValidation.md) and [Installation.md](Installation.md).

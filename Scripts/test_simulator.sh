@@ -10,6 +10,3 @@ xcodebuild -project Micophone-iOS.xcodeproj -scheme Micophone-iOS \
   -resultBundlePath "$PWD/build/SimulatorTests.xcresult" \
   ARCHS="$simulator_arch" ONLY_ACTIVE_ARCH=YES \
   CODE_SIGNING_ALLOWED=YES CODE_SIGN_IDENTITY=- test | tee build/simulator-tests.log
-xcrun simctl launch "$device_id" org.micophone.ios
-sleep 2
-xcrun simctl io "$device_id" screenshot build/SimulatorApp.png

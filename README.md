@@ -2,7 +2,7 @@
 
 A native SwiftUI iOS 16+ client for [Micophone](https://github.com/farzonline/micophone), using its existing Protocol v2 Windows receiver. MIT licensed, no ads, purchases, runtime accounts, telemetry or cloud audio services.
 
-**Validation status:** the native iPhone app compiles and archives successfully with Xcode 16.4. A real **unsigned IPA is available** from the [successful device build](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41899057773). Swift core/receiver checks pass; the first simulator run passed 11 of 12 tests, with an initial handshake timeout being rerun using a cold-start allowance. See the [test report](Documentation/TestResults.md). **Physical iPhone recording, Windows audio routing and locked-screen continuity have not been tested.** Background configuration is an implementation, not a verified device guarantee.
+**Validation status:** the native iPhone app compiles and archives successfully with Xcode 16.4. A real **unsigned IPA is available** from the [successful device build](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41899057773). **All 12 iOS simulator tests passed**, along with the 7 portable Swift and 5 receiver compatibility tests. The simulator run's later optional screenshot failed after Xcode shut down the device; that command has been removed. See the [test report](Documentation/TestResults.md). **Physical iPhone recording, Windows audio routing and locked-screen continuity have not been tested.** Background configuration is an implementation, not a verified device guarantee.
 
 ## Get the app
 

@@ -11,7 +11,7 @@ Date: 2026-11-04. Local implementation host: Windows, Python 3.10. No local Swif
 | Syntax parsing of all 18 tracked Swift files | PASS on Swift 6.4.1; parsing only, Apple SDK types not checked |
 | Native Swift/iOS simulator compilation | PASS: compiled and linked with Xcode 16.4 |
 | AVAudioConverter tests | PASS: both PCM conversion and stereo 44.1-to-48 kHz resampling tests executed |
-| Real UDP simulator tests | First run: recovery and unreachable-receiver tests PASS; initial handshake timed out. Rerun 41899415141 in progress |
+| Complete iOS simulator test suite | PASS: all 12 tests, 0 failures in run 41902243952; later optional screenshot failed, described below |
 | Real arm64 device archive / unsigned IPA | PASS: real iPhoneOS archive and unsigned IPA produced in run 41899057773 |
 | Signed installation / physical mic audio / Windows routing | NOT TESTED |
 | Screen locked, 10-minute continuity, interruptions and Bluetooth | NOT TESTED |
@@ -53,7 +53,14 @@ This confirms compilation/execution of production portable Swift code and whole-
 The earlier ARM/Intel requests failed before compilation because GitHub could not allocate a hosted runner. A later Intel retry received a runner and compiled the app successfully. Xcode 16.4 (16F6) is recorded in `Evidence/XcodeVersion.txt`.
 
 - [First simulator execution, run 41897439702](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41897439702), source `6d69ce7`: **11 of 12 tests passed**. Both AVAudioConverter tests, seven core tests, actual connection failure and automatic recovery tests passed. The first handshake test exceeded its five-second allowance while the first Network.framework callbacks were delayed on the cold simulator. This run is recorded as FAILED, not PASSED.
-- The harness now explicitly boots/reuses the simulator and allows up to 20 seconds for an actual ACK, including the production timeout/retry cycle. PCM packet and mute assertions are unchanged. Production network timeouts and app source are unchanged. [Rerun 41899415141](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41899415141) is in progress.
+- [Rerun 41899415141](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41899415141) was CANCELLED for diagnostics after prolonged simulator startup/compilation; its tests had not started, and it is not counted as a pass. The extra preboot wait was removed. Simulator builds now use only the host architecture and normal ad hoc local signing; device archives remain unsigned. The harness allows up to 20 seconds for an actual ACK, including the production timeout/retry cycle. PCM, mute and recovery assertions and production timeouts are unchanged.
+- [Final simulator execution, run 41902243952](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41902243952), source `5a3facf`: **all 12 tests PASS**, 0 failures, `TEST SUCCEEDED`. Exact output is retained in `Evidence/SimulatorTests.log`. After successful testing, the optional screenshot command failed with `Unable to lookup in current state: Shutdown`; thus the overall job was red and its following device archive was skipped. That post-test command has been removed; no test assertion or app code was removed. The separate successful device build below supplies the real IPA.
 - [Device archive, run 41899057773](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41899057773), source `ab54b80`: **PASS**, real arm64 iPhoneOS app archived and packaged. See [BuildArtifact.md](BuildArtifact.md) for checksum and independent ZIP/Mach-O inspection. The complete archive log is retained as `Evidence/DeviceArchive.log`.
 
-Native compilation and packaging are verified. The complete simulator suite is not marked passed until its rerun succeeds. The [device test plan](DeviceValidation.md) remains entirely NOT TESTED irrespective of simulator results.
+```text
+Test Suite 'All tests' passed at 2026-11-04 20:06:46.036 UTC
+Executed 12 tests, with 0 failures (0 unexpected) in 17.022 seconds
+** TEST SUCCEEDED **
+```
+
+Native compilation, all simulator tests and device packaging are verified independently. No screenshot or physical-device success is claimed. The [device test plan](DeviceValidation.md) remains entirely NOT TESTED irrespective of simulator results.
