@@ -5,7 +5,7 @@
 The repository's `.github/workflows/ios.yml` uses `macos-26` and the runner's selected Xcode. It records toolchain versions, checks the pinned protocol fixtures/project, runs portable Swift tests, builds and tests the app in an available iPhone simulator, then archives an arm64 iPhoneOS app with signing disabled. No Apple certificates, passwords, paid developer account or repository secrets are needed for this unsigned build. GitHub account/Actions access is a development dependency, not an app runtime account requirement.
 
 1. Open [Build and test iOS](https://github.com/SimbaPlayTT/Micophone-iOS/actions/workflows/ios.yml).
-2. A push of application/build/test files starts the workflow; **Run workflow** can also start it manually.
+2. A push of application/build/test files starts the workflow; **Run workflow** can also start it manually. The manual runner choice offers standard `macos-26`, `macos-15` and `macos-15-intel` pools if one is waiting for capacity. It never selects paid larger runners.
 3. Select a successful run and download **Micophone-iOS-unsigned** under Artifacts (GitHub may require sign-in to download).
 4. Extract the artifact ZIP. It contains the **real compiled, unsigned** `Micophone-iOS-unsigned.ipa`, SHA-256 file and Xcode version. A separate evidence artifact contains test results/logs.
 

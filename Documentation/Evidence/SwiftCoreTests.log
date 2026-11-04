@@ -1,0 +1,52 @@
+﻿2026-11-04T15:05:31.1789469Z ##[group]Run swift --version
+2026-11-04T15:05:31.1790043Z [36;1mswift --version[0m
+2026-11-04T15:05:31.1790497Z [36;1mswift test[0m
+2026-11-04T15:05:31.1812089Z shell: /usr/bin/bash -e {0}
+2026-11-04T15:05:31.1812568Z ##[endgroup]
+2026-11-04T15:06:05.9456978Z Swift version 6.4.2 (swift-6.4.2-RELEASE)
+2026-11-04T15:06:05.9458510Z Target: x86_64-unknown-linux-gnu
+2026-11-04T15:06:41.8196206Z Building for debugging...
+2026-11-04T15:06:41.8196712Z [Computing dependencies]
+2026-11-04T15:06:42.2226524Z [Pre-planning 1 / 154]
+2026-11-04T15:06:43.7189796Z [Planning deferred tasks]
+2026-11-04T15:06:43.8365203Z [Starting]
+2026-11-04T15:06:44.1698179Z [34 / 57] MicophoneCore
+2026-11-04T15:06:57.8073284Z [38 / 61] MicophoneCore
+2026-11-04T15:06:58.4592041Z [46 / 66] MicophoneCoreTests-product
+2026-11-04T15:07:01.0710075Z [48 / 66] MicophoneCoreTests-product
+2026-11-04T15:07:01.1960759Z [52 / 66] MicophoneCore
+2026-11-04T15:07:01.5441449Z [56 / 67] MicophoneCoreTests-product
+2026-11-04T15:07:01.9074991Z [60 / 68] MicophoneCoreTests-product
+2026-11-04T15:07:02.2236596Z [61 / 68] MicophoneCoreTests-test-runner
+2026-11-04T15:07:02.3642675Z [64 / 71] MicophoneCore-product
+2026-11-04T15:07:02.8397148Z [64 / 71] MicophoneCoreTests-test-runner
+2026-11-04T15:07:03.2831099Z [68 / 71] MicophoneCoreTests-test-runner
+2026-11-04T15:07:03.5743715Z [72 / 72] MicophoneCoreTests-test-runner
+2026-11-04T15:07:04.6527678Z Build complete! (22.43 secs)
+2026-11-04T15:07:05.5378705Z Test Suite 'All tests' started at 2026-11-04 15:07:04.757
+2026-11-04T15:07:05.5380720Z Test Suite 'Debug-linux-x86_64.xctest' started at 2026-11-04 15:07:04.884
+2026-11-04T15:07:05.5381935Z Test Suite 'CoreTests' started at 2026-11-04 15:07:04.884
+2026-11-04T15:07:05.5383232Z Test Case 'CoreTests.testBoundedQueueDropsOldestAndClearsOnStop' started at 2026-11-04 15:07:04.884
+2026-11-04T15:07:05.5384983Z Test Case 'CoreTests.testBoundedQueueDropsOldestAndClearsOnStop' passed (0.001 seconds)
+2026-11-04T15:07:05.5386442Z Test Case 'CoreTests.testConnectionFailureBusyAndRecovery' started at 2026-11-04 15:07:04.886
+2026-11-04T15:07:05.5387834Z Test Case 'CoreTests.testConnectionFailureBusyAndRecovery' passed (0.0 seconds)
+2026-11-04T15:07:05.5389547Z Test Case 'CoreTests.testFramingAcrossCallbackBoundariesWithoutSampleLoss' started at 2026-11-04 15:07:04.886
+2026-11-04T15:07:05.5391288Z Test Case 'CoreTests.testFramingAcrossCallbackBoundariesWithoutSampleLoss' passed (0.001 seconds)
+2026-11-04T15:07:05.5392804Z Test Case 'CoreTests.testOnlyPrivateLANEndpointsAreAccepted' started at 2026-11-04 15:07:04.887
+2026-11-04T15:07:05.5394146Z Test Case 'CoreTests.testOnlyPrivateLANEndpointsAreAccepted' passed (0.001 seconds)
+2026-11-04T15:07:05.5395470Z Test Case 'CoreTests.testPCMClippingEndianMuteAndNonFiniteSamples' started at 2026-11-04 15:07:04.887
+2026-11-04T15:07:05.5397496Z Test Case 'CoreTests.testPCMClippingEndianMuteAndNonFiniteSamples' passed (0.0 seconds)
+2026-11-04T15:07:05.5398877Z Test Case 'CoreTests.testProtocolFixturesMatchUpstream' started at 2026-11-04 15:07:04.888
+2026-11-04T15:07:05.5400270Z Test Case 'CoreTests.testProtocolFixturesMatchUpstream' passed (0.002 seconds)
+2026-11-04T15:07:05.5401560Z Test Case 'CoreTests.testStartStopInterruptionAndPermissionRace' started at 2026-11-04 15:07:04.890
+2026-11-04T15:07:05.5402938Z Test Case 'CoreTests.testStartStopInterruptionAndPermissionRace' passed (0.0 seconds)
+2026-11-04T15:07:05.5403919Z Test Suite 'CoreTests' passed at 2026-11-04 15:07:04.890
+2026-11-04T15:07:05.5404740Z 	 Executed 7 tests, with 0 failures (0 unexpected) in 0.006 (0.006) seconds
+2026-11-04T15:07:05.5405654Z Test Suite 'Debug-linux-x86_64.xctest' passed at 2026-11-04 15:07:04.890
+2026-11-04T15:07:05.5406546Z 	 Executed 7 tests, with 0 failures (0 unexpected) in 0.006 (0.006) seconds
+2026-11-04T15:07:05.5407345Z Test Suite 'All tests' passed at 2026-11-04 15:07:04.890
+2026-11-04T15:07:05.5408143Z 	 Executed 7 tests, with 0 failures (0 unexpected) in 0.006 (0.006) seconds
+2026-11-04T15:07:05.5409279Z ◇ Test run started.
+2026-11-04T15:07:05.5409936Z ↳ Testing Library Version: 6.4.2 (288a2328ff84644)
+2026-11-04T15:07:05.5411018Z ↳ Target Platform: x86_64-unknown-linux-gnu
+2026-11-04T15:07:05.5411802Z ✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.
