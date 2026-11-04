@@ -7,10 +7,11 @@ Date: 2026-11-04. Local implementation host: Windows, Python 3.10. No local Swif
 | Original public repository clone / pinned commit | PASS: inspected `e7d977d3bf5fce6b8666a28f5602c45ab422b1ba` |
 | Static project/resource/permission/source-hash validation | PASS: `python Scripts/check_project.py` executed |
 | Python actual receiver UDP compatibility | PASS: 5 tests, 0 failures, executed on Windows with loopback access |
-| Swift portable PCM/framing/state tests | PASS: compiled with Swift 6.4.2 on GitHub Ubuntu 24.04; 7 tests, 0 failures |
-| Native Swift/iOS simulator compilation | PENDING GitHub macOS workflow execution |
-| AVAudioConverter and real UDP simulator tests | PENDING GitHub macOS workflow execution |
-| Real arm64 device archive / unsigned IPA | PENDING GitHub macOS workflow execution |
+| Swift portable PCM/framing/state tests | PASS: compiled with Swift 6.4.2 and 6.4.1 on GitHub Ubuntu 24.04; 7 tests, 0 failures per run |
+| Syntax parsing of all 18 tracked Swift files | PASS on Swift 6.4.1; parsing only, Apple SDK types not checked |
+| Native Swift/iOS simulator compilation | QUEUED / NOT EXECUTED: no Mac runner assigned |
+| AVAudioConverter and real UDP simulator tests | QUEUED / NOT EXECUTED |
+| Real arm64 device archive / unsigned IPA | QUEUED / NOT PRODUCED |
 | Signed installation / physical mic audio / Windows routing | NOT TESTED |
 | Screen locked, 10-minute continuity, interruptions and Bluetooth | NOT TESTED |
 
@@ -42,4 +43,15 @@ CoreTests.testStartStopInterruptionAndPermissionRace ... passed
 Executed 7 tests, with 0 failures (0 unexpected)
 ```
 
-This confirms compilation/execution of production portable Swift code, not AVFoundation, SwiftUI or Network.framework compilation. Both standard ARM and Intel Mac runner attempts were queued without runner assignment at this point; no native test or IPA success is inferred. Native results and artifacts will be recorded after they complete. The [device test plan](DeviceValidation.md) remains entirely NOT TESTED irrespective of simulator results.
+Main-branch runs [41854736134](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41854736134) and [41855747914](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41855747914) also succeeded. The latter uses commit `04e452cf255400c487fb4017c876de87a4ffa32e`, Swift 6.4.1 and additionally parses every tracked Swift file with the real compiler's `-frontend -parse` mode. Its logs are `Evidence/SwiftCoreTests-main.log` and `Evidence/SwiftSyntax.log`.
+
+This confirms compilation/execution of production portable Swift code and whole-source syntax validity, not AVFoundation, SwiftUI or Network.framework type checking/linking.
+
+## Native build blocker at delivery
+
+GitHub accepted the workflows, Actions is enabled and its check API reports zero error annotations. Standard ARM macOS 15 and macOS 26 pools were attempted; the Intel fallback was also requested. No Mac job received a runner during this session. This is an external runner-allocation blocker; no compilation/test success or IPA is inferred from a queued job.
+
+- [Main ARM macOS 26 build, run 41854735985](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41854735985): QUEUED, no runner, no steps executed, source revision `6ef0ec0` (same app source as delivery).
+- [Intel macOS 15 fallback, run 41854401219](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41854401219): QUEUED, no runner, no steps executed, source revision `42fdeac` (same app source as delivery).
+
+Both requests remain active. If a native run fails once a runner becomes available, inspect its compiler/test log and fix it before describing the app as build-verified. No IPA or screenshot has been fabricated. The [device test plan](DeviceValidation.md) remains entirely NOT TESTED irrespective of eventual simulator results.

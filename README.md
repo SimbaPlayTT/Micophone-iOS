@@ -2,9 +2,11 @@
 
 A native SwiftUI iOS 16+ client for [Micophone](https://github.com/farzonline/micophone), using its existing Protocol v2 Windows receiver. MIT licensed, no ads, purchases, runtime accounts, telemetry or cloud audio services.
 
-**Validation status:** source and project implemented; native build, simulator tests and IPA production are performed by the repository's [GitHub Actions workflow](https://github.com/SimbaPlayTT/Micophone-iOS/actions/workflows/ios.yml). Check the latest run and [test report](Documentation/TestResults.md) for actual results. **Physical iPhone recording, Windows audio routing and locked-screen continuity have not been tested.** Background configuration is an implementation, not a verified device guarantee.
+**Validation status:** source and project implemented. **7 Swift core tests, 5 receiver compatibility tests, static project checks and syntax parsing of all Swift sources passed.** The native [GitHub Actions build](https://github.com/SimbaPlayTT/Micophone-iOS/actions/runs/41854735985) is queued without a Mac runner; no iOS compilation, simulator test, archive or IPA has completed yet. See the [test report](Documentation/TestResults.md) for executed evidence. **Physical iPhone recording, Windows audio routing and locked-screen continuity have not been tested.** Background configuration is an implementation, not a verified device guarantee.
 
 ## Get the app
+
+**An IPA is not available at delivery while the Mac builds are queued.** The following steps apply after the native workflow succeeds. The complete source and Xcode project are available now.
 
 1. Open **Actions → Build and test iOS → latest successful run**.
 2. Download **Micophone-iOS-unsigned**, extract the ZIP, and find `Micophone-iOS-unsigned.ipa`.
@@ -54,6 +56,7 @@ The iOS app and upstream receiver are MIT open source. The original receiver com
 - [Build, free signing and installation](Documentation/Installation.md)
 - [Physical-device test plan](Documentation/DeviceValidation.md)
 - [Executed tests and remaining checks](Documentation/TestResults.md)
+- [Requirement status](Documentation/RequirementStatus.md)
 - [Architecture and threading](Documentation/Architecture.md)
 
 Compatible protocol source: upstream commit `e7d977d3bf5fce6b8666a28f5602c45ab422b1ba` (Micophone 2.0.0). Required upstream notices are retained in [LICENSE](LICENSE), the app's Settings screen and [Upstream](Upstream). See [UPSTREAM.json](Upstream/UPSTREAM.json) for paths and file hashes. No upstream code has been patched.

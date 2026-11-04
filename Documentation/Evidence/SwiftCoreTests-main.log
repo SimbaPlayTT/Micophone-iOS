@@ -1,0 +1,49 @@
+﻿2026-11-04T15:15:11.0743239Z ##[group]Run swift --version
+2026-11-04T15:15:11.0743563Z [36;1mswift --version[0m
+2026-11-04T15:15:11.0743789Z [36;1mswift test[0m
+2026-11-04T15:15:11.0762173Z shell: /usr/bin/bash -e {0}
+2026-11-04T15:15:11.0762435Z ##[endgroup]
+2026-11-04T15:15:33.7929630Z Swift version 6.4.1 (swift-6.4.1-RELEASE)
+2026-11-04T15:15:33.7930054Z Target: x86_64-unknown-linux-gnu
+2026-11-04T15:15:57.0327044Z Building for debugging...
+2026-11-04T15:15:57.0327437Z [Constructing description]
+2026-11-04T15:15:57.1985843Z [Pre-planning 1 / 154]
+2026-11-04T15:15:57.7361750Z [Planning deferred tasks]
+2026-11-04T15:15:57.8434180Z [1 / 56]
+2026-11-04T15:16:04.1323580Z [38 / 61] MicophoneCore
+2026-11-04T15:16:04.3660185Z [46 / 66] MicophoneCoreTests-product
+2026-11-04T15:16:07.3460197Z [46 / 66] MicophoneCore
+2026-11-04T15:16:07.4663139Z [56 / 67] MicophoneCoreTests-product
+2026-11-04T15:16:07.7314169Z [60 / 68] MicophoneCore-product
+2026-11-04T15:16:07.8408930Z [61 / 68] MicophoneCoreTests-test-runner
+2026-11-04T15:16:08.2414150Z [64 / 71] MicophoneCoreTests-test-runner
+2026-11-04T15:16:08.4184135Z [68 / 71] MicophoneCoreTests-test-runner
+2026-11-04T15:16:08.6359731Z [72 / 72] MicophoneCoreTests-test-runner
+2026-11-04T15:16:09.1350089Z Build complete! (12.05 secs)
+2026-11-04T15:16:09.4679795Z Test Suite 'All tests' started at 2026-11-04 15:16:09.225
+2026-11-04T15:16:09.4683608Z Test Suite 'Debug-linux-x86_64.xctest' started at 2026-11-04 15:16:09.295
+2026-11-04T15:16:09.4684182Z Test Suite 'CoreTests' started at 2026-11-04 15:16:09.295
+2026-11-04T15:16:09.4684917Z Test Case 'CoreTests.testBoundedQueueDropsOldestAndClearsOnStop' started at 2026-11-04 15:16:09.295
+2026-11-04T15:16:09.4685836Z Test Case 'CoreTests.testBoundedQueueDropsOldestAndClearsOnStop' passed (0.001 seconds)
+2026-11-04T15:16:09.4686722Z Test Case 'CoreTests.testConnectionFailureBusyAndRecovery' started at 2026-11-04 15:16:09.297
+2026-11-04T15:16:09.4687570Z Test Case 'CoreTests.testConnectionFailureBusyAndRecovery' passed (0.0 seconds)
+2026-11-04T15:16:09.4688682Z Test Case 'CoreTests.testFramingAcrossCallbackBoundariesWithoutSampleLoss' started at 2026-11-04 15:16:09.297
+2026-11-04T15:16:09.4689787Z Test Case 'CoreTests.testFramingAcrossCallbackBoundariesWithoutSampleLoss' passed (0.001 seconds)
+2026-11-04T15:16:09.4690772Z Test Case 'CoreTests.testOnlyPrivateLANEndpointsAreAccepted' started at 2026-11-04 15:16:09.297
+2026-11-04T15:16:09.4691632Z Test Case 'CoreTests.testOnlyPrivateLANEndpointsAreAccepted' passed (0.0 seconds)
+2026-11-04T15:16:09.4692526Z Test Case 'CoreTests.testPCMClippingEndianMuteAndNonFiniteSamples' started at 2026-11-04 15:16:09.298
+2026-11-04T15:16:09.4693537Z Test Case 'CoreTests.testPCMClippingEndianMuteAndNonFiniteSamples' passed (0.0 seconds)
+2026-11-04T15:16:09.4694481Z Test Case 'CoreTests.testProtocolFixturesMatchUpstream' started at 2026-11-04 15:16:09.298
+2026-11-04T15:16:09.4695287Z Test Case 'CoreTests.testProtocolFixturesMatchUpstream' passed (0.002 seconds)
+2026-11-04T15:16:09.4696457Z Test Case 'CoreTests.testStartStopInterruptionAndPermissionRace' started at 2026-11-04 15:16:09.300
+2026-11-04T15:16:09.4697280Z Test Case 'CoreTests.testStartStopInterruptionAndPermissionRace' passed (0.0 seconds)
+2026-11-04T15:16:09.4697900Z Test Suite 'CoreTests' passed at 2026-11-04 15:16:09.300
+2026-11-04T15:16:09.4698386Z 	 Executed 7 tests, with 0 failures (0 unexpected) in 0.005 (0.005) seconds
+2026-11-04T15:16:09.4699128Z Test Suite 'Debug-linux-x86_64.xctest' passed at 2026-11-04 15:16:09.300
+2026-11-04T15:16:09.4699702Z 	 Executed 7 tests, with 0 failures (0 unexpected) in 0.005 (0.005) seconds
+2026-11-04T15:16:09.4700179Z Test Suite 'All tests' passed at 2026-11-04 15:16:09.300
+2026-11-04T15:16:09.4700675Z 	 Executed 7 tests, with 0 failures (0 unexpected) in 0.005 (0.005) seconds
+2026-11-04T15:16:09.4701346Z ◇ Test run started.
+2026-11-04T15:16:09.4701728Z ↳ Testing Library Version: 6.4.1 (804dc4530ef3666)
+2026-11-04T15:16:09.4702189Z ↳ Target Platform: x86_64-unknown-linux-gnu
+2026-11-04T15:16:09.4702726Z ✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

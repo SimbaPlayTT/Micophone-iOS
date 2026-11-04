@@ -1,0 +1,4 @@
+﻿2026-11-04T15:16:09.4881191Z ##[group]Run git ls-files -z '*.swift' | xargs -0 -n 1 swiftc -frontend -parse
+2026-11-04T15:16:09.4881689Z [36;1mgit ls-files -z '*.swift' | xargs -0 -n 1 swiftc -frontend -parse[0m
+2026-11-04T15:16:09.4899324Z shell: /usr/bin/bash -e {0}
+2026-11-04T15:16:09.4899541Z ##[endgroup]
